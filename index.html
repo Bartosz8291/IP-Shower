@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your IP Address</title>
+    <script>
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                document.getElementById('ip').innerText = `Your IP Address: ${data.ip}`;
+            } catch (error) {
+                document.getElementById('ip').innerText = 'Unable to retrieve IP. Please check your network connection.';
+            }
+        }
+
+        window.onload = getUserIP;
+    </script>
+</head>
+<body>
+    <h1>Your IP Address</h1>
+    <p id="ip">Loading...</p>
+    <p><em>Your IP address is not being sent anywhere; it is only displayed on this page.</em></p>
+</body>
+</html>
